@@ -19,28 +19,28 @@
   "panels": [
     {
       "aliasColors": {},
-      "bars": false,
+      "bars": true,
       "dashLength": 10,
       "dashes": false,
       "datasource": "boiler",
-      "fill": 0,
+      "fill": 1,
       "gridPos": {
-        "h": 12,
-        "w": 19,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 10,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
-      "lines": true,
+      "lines": false,
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
@@ -54,22 +54,22 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "MQTT",
+          "alias": "kWhrs / hr",
           "groupBy": [
             {
               "params": [
-                "$__interval"
+                "1h"
               ],
               "type": "time"
             },
             {
               "params": [
-                "previous"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "Status",
+          "measurement": "Mains",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -78,182 +78,29 @@
             [
               {
                 "params": [
-                  "value"
+                  "Power"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               },
               {
                 "params": [
-                  "+6"
+                  " / 360 * 1/1000"
                 ],
                 "type": "math"
               }
             ]
           ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=",
-              "value": "My-Hot-Water-Control"
-            }
-          ]
-        },
-        {
-          "alias": "DHW Valve",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Status",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "+2"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=",
-              "value": "DHW-Valve"
-            }
-          ]
-        },
-        {
-          "alias": "BDR91",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Status",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "+4"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=",
-              "value": "DHW_BDR91"
-            }
-          ]
-        },
-        {
-          "alias": "Boiler OT Demand",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "Value",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  " / 200"
-                ],
-                "type": "math"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "name",
-              "operator": "=",
-              "value": "Boiler-(OT-Bridge)"
-            }
-          ]
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Panel Title",
+      "title": "Power Consumption kWhrs / hr",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -270,7 +117,129 @@
       "yaxes": [
         {
           "format": "short",
+          "label": "Energy (kWh)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
           "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "boiler",
+      "decimals": 2,
+      "description": "",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": false,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "kWhr per day",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "Mains",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Power"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              },
+              {
+                "params": [
+                  " / 360*1/1000"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Power Consumption kWh per Day",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Energy (kWh)",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -295,23 +264,23 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "nodered",
-      "fill": 1,
+      "datasource": "boiler",
+      "fill": 0,
       "gridPos": {
-        "h": 7,
-        "w": 24,
+        "h": 10,
+        "w": 12,
         "x": 0,
-        "y": 12
+        "y": 9
       },
-      "id": 2,
+      "id": 6,
       "legend": {
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -327,6 +296,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "Power (kW)",
           "groupBy": [
             {
               "params": [
@@ -336,12 +306,12 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "moisture1",
+          "measurement": "Mains",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -350,7 +320,7 @@
             [
               {
                 "params": [
-                  "value"
+                  "Power"
                 ],
                 "type": "field"
               },
@@ -366,7 +336,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Chilli Pot Moisture",
+      "title": "Power KW",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -382,19 +352,136 @@
       },
       "yaxes": [
         {
-          "format": "hertz",
-          "label": "Probe 1 Moisture",
+          "format": "short",
+          "label": "Power (kW)",
           "logBase": 1,
-          "max": "6000",
-          "min": "2500",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
-          "format": "volt",
-          "label": "Probe 1 Battery",
+          "format": "kwatt",
+          "label": null,
           "logBase": 1,
-          "max": "6",
-          "min": "0",
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "boiler",
+      "description": "Mains Supply Parameters",
+      "fill": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 2,
+      "legend": {
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Voltage (V)",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "Mains",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Voltage"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Mains Supply",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "Mains Voltage (V)",
+          "logBase": 1,
+          "max": "250",
+          "min": "230",
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "Mains Frequency",
+          "logBase": 1,
+          "max": "55",
+          "min": "45",
           "show": false
         }
       ],
@@ -408,136 +495,23 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "nodered",
-      "fill": 1,
+      "datasource": "boiler",
+      "fill": 0,
       "gridPos": {
-        "h": 7,
+        "h": 10,
         "w": 12,
         "x": 0,
-        "y": 19
-      },
-      "id": 4,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "linear"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "vcc1",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Probe 1 Battery",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "volt",
-          "label": "Probe 1 Battery Volts",
-          "logBase": 1,
-          "max": "5",
-          "min": "3",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "nodered",
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
         "y": 19
       },
       "id": 8,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -553,6 +527,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "Power Factor (PF)",
           "groupBy": [
             {
               "params": [
@@ -562,12 +537,12 @@
             },
             {
               "params": [
-                "none"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "volts",
+          "measurement": "Mains",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -576,7 +551,7 @@
             [
               {
                 "params": [
-                  "value"
+                  "PF"
                 ],
                 "type": "field"
               },
@@ -592,7 +567,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Solar Battery Voltage",
+      "title": "Power Factor",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -608,11 +583,11 @@
       },
       "yaxes": [
         {
-          "format": "volt",
-          "label": null,
+          "format": "short",
+          "label": "Power Factor (PF)",
           "logBase": 1,
-          "max": "16",
-          "min": "10",
+          "max": null,
+          "min": null,
           "show": true
         },
         {
@@ -634,23 +609,24 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "nodered",
-      "fill": 1,
+      "datasource": "boiler",
+      "decimals": 1,
+      "fill": 0,
       "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 26
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 19
       },
-      "id": 6,
+      "id": 4,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -666,6 +642,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "Frequency (Hz)",
           "groupBy": [
             {
               "params": [
@@ -675,12 +652,12 @@
             },
             {
               "params": [
-                "linear"
+                "null"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "litmin",
+          "measurement": "Mains",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -689,43 +666,7 @@
             [
               {
                 "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "0"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "littot",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
+                  "Frequency"
                 ],
                 "type": "field"
               },
@@ -741,7 +682,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Flow Rate",
+      "title": "Mains Frequency",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -757,11 +698,12 @@
       },
       "yaxes": [
         {
+          "decimals": null,
           "format": "short",
-          "label": "Litres / Minute",
+          "label": "Frequency (Hz)",
           "logBase": 1,
-          "max": "5",
-          "min": "0",
+          "max": "51",
+          "min": "49",
           "show": true
         },
         {
@@ -770,7 +712,7 @@
           "logBase": 1,
           "max": null,
           "min": null,
-          "show": true
+          "show": false
         }
       ],
       "yaxis": {
@@ -779,7 +721,7 @@
       }
     }
   ],
-  "refresh": false,
+  "refresh": "30s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -787,7 +729,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -815,7 +757,7 @@
       "30d"
     ]
   },
-  "timezone": "",
-  "title": "Node-Red",
-  "uid": "T8czlJzgz"
+  "timezone": "browser",
+  "title": "Mains Supply Parameters",
+  "uid": "blThIOiRz"
 }
